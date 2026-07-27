@@ -39,9 +39,9 @@ export async function fetchBusinessName(
 
 export const getBusinessName = createServerFn({ method: "GET" }).handler(
   async () => {
-return fetchBusinessName(() =>
-  readFile(new URL("../../site.json", import.meta.url).pathname, "utf8"),
-);
+    return fetchBusinessName(() =>
+      readFile(new URL("../../site.json", import.meta.url).pathname, "utf8"),
+    );
   },
 );
 
@@ -112,12 +112,20 @@ function Home() {
           <span className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
             {businessName}
           </span>
-          <a
-            href="#contact"
-            className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
-          >
-            Work with us
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href="mailto:shipwright-engineering-e28ee0f8@ctomail.io"
+              className="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+            >
+              shipwright-engineering-e28ee0f8@ctomail.io
+            </a>
+            <a
+              href="#contact"
+              className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
+            >
+              Work with us
+            </a>
+          </div>
         </div>
       </header>
 
@@ -148,6 +156,15 @@ function Home() {
             What we offer →
           </a>
         </div>
+        <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+          or email us at{" "}
+          <a
+            href="mailto:shipwright-engineering-e28ee0f8@ctomail.io"
+            className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+          >
+            shipwright-engineering-e28ee0f8@ctomail.io
+          </a>
+        </p>
       </section>
 
       {/* Services */}
@@ -223,11 +240,22 @@ function Home() {
           </p>
           <div className="mt-10">
             <a
-              href="mailto:hello@shipwright.engineering"
-              className="inline-flex rounded-xl bg-white px-8 py-3.5 text-base font-semibold text-gray-900 shadow-sm transition hover:bg-gray-100"
+              href="mailto:shipwright-engineering-e28ee0f8@ctomail.io"
+              className="text-2xl font-semibold text-indigo-400 hover:text-indigo-300"
             >
-              Work with us
+              shipwright-engineering-e28ee0f8@ctomail.io
             </a>
+            <p className="mt-2 text-base text-gray-400">
+              Tell us about your project and we'll get back to you within 24 hours.
+            </p>
+            <div className="mt-6">
+              <a
+                href="mailto:shipwright-engineering-e28ee0f8@ctomail.io"
+                className="inline-flex rounded-xl bg-white px-8 py-3.5 text-base font-semibold text-gray-900 shadow-sm transition hover:bg-gray-100"
+              >
+                Work with us
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -235,9 +263,17 @@ function Home() {
       {/* Footer */}
       <footer className="border-t border-gray-100 px-4 py-8 dark:border-gray-800 sm:px-6">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
-          <span className="text-sm font-medium text-gray-900 dark:text-white">
-            {businessName}
-          </span>
+          <div className="flex flex-col items-center gap-1 sm:flex-row sm:gap-4">
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              {businessName}
+            </span>
+            <a
+              href="mailto:shipwright-engineering-e28ee0f8@ctomail.io"
+              className="text-sm text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+            >
+              shipwright-engineering-e28ee0f8@ctomail.io
+            </a>
+          </div>
           <span className="text-sm text-gray-400 dark:text-gray-600">
             Built with{" "}
             <a
