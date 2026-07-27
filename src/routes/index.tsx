@@ -39,7 +39,9 @@ export async function fetchBusinessName(
 
 export const getBusinessName = createServerFn({ method: "GET" }).handler(
   async () => {
-    return fetchBusinessName(() => readFile("site.json", "utf8"));
+return fetchBusinessName(() =>
+  readFile(new URL("../../site.json", import.meta.url).pathname, "utf8"),
+);
   },
 );
 
@@ -54,7 +56,7 @@ const services = [
     description:
       "Need a new capability in your SaaS? We design and deliver production-ready features — from database to UI — on a fixed scope and timeline.",
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
       </svg>
     ),
@@ -64,7 +66,7 @@ const services = [
     description:
       "Starting from zero? We take your idea from concept to launched SaaS — architecture, backend, frontend, testing, and deployment.",
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
       </svg>
     ),
@@ -74,7 +76,7 @@ const services = [
     description:
       "Keep your product healthy with ongoing support — bug fixes, dependency upgrades, small iterations, and a team that knows your codebase.",
     icon: (
-      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
       </svg>
     ),
@@ -221,7 +223,7 @@ function Home() {
           </p>
           <div className="mt-10">
             <a
-              href="#"
+              href="mailto:hello@shipwright.engineering"
               className="inline-flex rounded-xl bg-white px-8 py-3.5 text-base font-semibold text-gray-900 shadow-sm transition hover:bg-gray-100"
             >
               Work with us

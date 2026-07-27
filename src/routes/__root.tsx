@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
+import { ErrorBoundary } from "~/components/ErrorBoundary";
 import appCss from "~/styles/app.css?url";
 
 export const Route = createRootRoute({
@@ -13,7 +14,12 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "My site" },
+      { title: "Shipwright Engineering" },
+      {
+        name: "description",
+        content:
+          "Shipwright Engineering — a focused team that builds production-quality SaaS. Architecture, backend, frontend, and tests. Now accepting clients.",
+      },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
@@ -24,7 +30,9 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <ErrorBoundary>
+        <Outlet />
+      </ErrorBoundary>
     </RootDocument>
   );
 }
