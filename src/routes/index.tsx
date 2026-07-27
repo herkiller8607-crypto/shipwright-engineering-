@@ -39,9 +39,9 @@ export async function fetchBusinessName(
 
 export const getBusinessName = createServerFn({ method: "GET" }).handler(
   async () => {
-    return fetchBusinessName(() =>
-      readFile(new URL("../../site.json", import.meta.url).pathname, "utf8"),
-    );
+return fetchBusinessName(() =>
+  readFile(new URL("../../site.json", import.meta.url).pathname, "utf8"),
+);
   },
 );
 
