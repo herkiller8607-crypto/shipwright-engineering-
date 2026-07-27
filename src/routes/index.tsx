@@ -2,16 +2,46 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { readFile } from "node:fs/promises";
 
-const getBusinessName = createServerFn({ method: "GET" }).handler(async () => {
+/**
+ * Pure function: resolves the business name from a parsed config object.
+ * Extracted for testability — all business-name logic lives here.
+ */
+export function resolveBusinessName(config: unknown): string {
+  if (
+    config !== null &&
+    typeof config === "object" &&
+    "businessName" in config
+  ) {
+    const name = (config as { businessName?: string }).businessName;
+    if (typeof name === "string" && name.trim().length > 0) {
+      return name.trim();
+    }
+  }
+  return "Shipwright Engineering";
+}
+
+/**
+ * Async fetcher that reads raw JSON, parses it, and resolves the business name.
+ * Accepts a read function for dependency injection — makes file-level errors
+ * testable without needing TanStack Start's server runtime.
+ */
+export async function fetchBusinessName(
+  readFn: () => Promise<string>,
+): Promise<string> {
   try {
-    const cfg = JSON.parse(await readFile("site.json", "utf8")) as {
-      businessName?: string;
-    };
-    return cfg.businessName?.trim() ?? "Shipwright Engineering";
+    const raw = await readFn();
+    const cfg = JSON.parse(raw);
+    return resolveBusinessName(cfg);
   } catch {
     return "Shipwright Engineering";
   }
-});
+}
+
+export const getBusinessName = createServerFn({ method: "GET" }).handler(
+  async () => {
+    return fetchBusinessName(() => readFile("site.json", "utf8"));
+  },
+);
 
 export const Route = createFileRoute("/")({
   loader: () => getBusinessName(),
